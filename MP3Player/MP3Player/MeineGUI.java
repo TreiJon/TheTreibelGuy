@@ -1,4 +1,5 @@
 // Importiert alle Klassen aus den wichtigsten Paketen zur GUI-Entwicklung
+import java.io.File;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,24 +12,23 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
     private JButton stopButton;
     private JButton playButton;
     private MusicPlayer player;
-    private JTextField sTitleTextField;
+    private JFileChooser fileC;
     public MeineGUI()
     {
         player = new MusicPlayer();
         setLayout(new FlowLayout());
 
-        sTitleTextField = new JTextField("Title Name");
         setButton = new JButton("set");
         playButton = new JButton("play");
         stopButton = new JButton("stop");
         percent = new JLabel("0%");
+        fileC = new JFileChooser();
 
         setButton.addActionListener(this);
         playButton.addActionListener(this);
         stopButton.addActionListener(this);
         player.addListener(this);
-
-        add(sTitleTextField);
+        
         add(setButton);
         add(playButton);
         add(stopButton);
@@ -48,7 +48,13 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == setButton)
-            player.open(sTitleTextField.getText());
+        {
+            int returnVal = fileC.showOpenDialog(MeineGUI.this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File datei = fileC.getSelectedFile();
+                player.open(datei.getAbsolutePath());
+            }
+        }
         else if(e.getSource() == playButton)
             player.play();
         else if(e.getSource() == stopButton)
@@ -67,11 +73,5 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
         catch(Exception e){
             System.out.println("Error setting Look and feel: " + e);
         }
-    }
-
-    public void test()
-    {
-        while(true)
-            percent.setText(Integer.toString(player.getPositionInPercent()));
     }
 }
