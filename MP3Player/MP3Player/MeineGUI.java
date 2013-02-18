@@ -21,7 +21,7 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
         setButton = new JButton("set");
         playButton = new JButton("play");
         stopButton = new JButton("stop");
-        percent = new JLabel("0%");
+        percent = new JLabel("000%");
         fileC = new JFileChooser();
 
         setButton.addActionListener(this);
