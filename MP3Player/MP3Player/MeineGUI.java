@@ -14,10 +14,12 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
     private JButton playButton;
     private MusicPlayer player;
     private JFileChooser fileC;
-    private int i;
+    private boolean p;
+    private boolean f;
     public MeineGUI()
     {
-        i = 0;
+        f = false;
+        p = false;
         player = new MusicPlayer();
         setLayout(new FlowLayout());
 
@@ -59,14 +61,15 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File datei = fileC.getSelectedFile();
                 player.open(datei.getAbsolutePath());
+                f = true;
             }
         }
-        else if(e.getSource() == playButton)
+        else if(e.getSource() == playButton && f)
         {  
-            if(i == 0)
+            if(!p)
             {
                 player.play();
-                i++;
+                p = true;
             }
             else
                 player.resume();
@@ -74,7 +77,7 @@ public class MeineGUI extends JFrame implements ActionListener, MusicPlayerListe
         else if(e.getSource() == stopButton)
         {
             player.stop();
-            i = 0;
+            p = false;
         }
         else if(e.getSource() == pauseButton)
             player.pause();
