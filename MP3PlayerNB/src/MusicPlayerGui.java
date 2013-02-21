@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.*;
 import java.io.File;
 import javax.swing.JFileChooser;
 /**
@@ -14,9 +15,13 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
     private MusicPlayer p;
     private JFileChooser fileC;
     private int pop;
+    private boolean mouse;
+    private LinkedList playl;
     
     
     public MusicPlayerGui() {
+        LinkedList<String> playList = new LinkedList<String>();
+        mouse = false;
         pop = 0;
         p = new MusicPlayer();
         p.addListener(this);
@@ -37,9 +42,9 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
 
         jButton1 = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
-        positionSlider = new javax.swing.JSlider();
         setButton = new javax.swing.JButton();
-        PlayResumeButton = new javax.swing.JButton();
+        playResumeButton = new javax.swing.JButton();
+        positionProgressBar = new javax.swing.JProgressBar();
 
         jButton1.setText("jButton1");
 
@@ -48,46 +53,45 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         stopButton.setBackground(new java.awt.Color(0, 0, 0));
-        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
-
-        positionSlider.setValue(0);
-        positionSlider.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                positionSliderStateChanged(evt);
+        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Stop-Disabled-icon.png"))); // NOI18N
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
             }
         });
 
-        setButton.setText("set");
+        setButton.setBackground(new java.awt.Color(0, 0, 0));
+        setButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Music-icon.png"))); // NOI18N
         setButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setButtonActionPerformed(evt);
             }
         });
 
-        PlayResumeButton.setText("playResume");
-        PlayResumeButton.addActionListener(new java.awt.event.ActionListener() {
+        playResumeButton.setBackground(new java.awt.Color(0, 0, 0));
+        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png"))); // NOI18N
+        playResumeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlayResumeButtonActionPerformed(evt);
+                playResumeButtonActionPerformed(evt);
             }
         });
+
+        positionProgressBar.setBackground(new java.awt.Color(0, 0, 0));
+        positionProgressBar.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 281, Short.MAX_VALUE)
-                        .addComponent(PlayResumeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(setButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13)
-                        .addComponent(stopButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(positionSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(setButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(playResumeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(stopButton)
+                .addGap(0, 272, Short.MAX_VALUE))
+            .addComponent(positionProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,10 +99,11 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
                 .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stopButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(setButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PlayResumeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 135, Short.MAX_VALUE)
-                .addComponent(positionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(playResumeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(setButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addComponent(positionProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -106,44 +111,49 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
 
     public void positionChanged(int newPosition)
     {
-       positionSlider.setValue(newPosition) ;
+       positionProgressBar.setValue(newPosition) ;
     }
     
-    private void positionSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_positionSliderStateChanged
-
-    }//GEN-LAST:event_positionSliderStateChanged
-
     private void setButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButtonActionPerformed
             int returnVal = fileC.showOpenDialog(MusicPlayerGui.this);
             if (returnVal == JFileChooser.APPROVE_OPTION)
             {
                 File datei = fileC.getSelectedFile();
                 p.open(datei.getAbsolutePath());
+                p.stop();
+//                playList.add
                 pop = 1;
             }
     }//GEN-LAST:event_setButtonActionPerformed
 
-    private void PlayResumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayResumeButtonActionPerformed
+    private void playResumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playResumeButtonActionPerformed
         if(pop != 0)
         {
-                   positionSlider.setValue(25) ;
             if(pop == 1)
             {
                 p.play();
                 pop = 2;
+                playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pause.png")));
             }
             else if(pop == 2)
             {
                 p.pause();
                 pop = 3;
+                playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png")));
             }
             else if(pop == 3)
             {
                 p.resume();
                 pop = 2;
+                playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Pause.png")));
             }
         }
-    }//GEN-LAST:event_PlayResumeButtonActionPerformed
+    }//GEN-LAST:event_playResumeButtonActionPerformed
+
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+        p.stop();
+        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png")));
+    }//GEN-LAST:event_stopButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,9 +190,9 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton PlayResumeButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JSlider positionSlider;
+    private javax.swing.JButton playResumeButton;
+    private javax.swing.JProgressBar positionProgressBar;
     private javax.swing.JButton setButton;
     private javax.swing.JButton stopButton;
     // End of variables declaration//GEN-END:variables

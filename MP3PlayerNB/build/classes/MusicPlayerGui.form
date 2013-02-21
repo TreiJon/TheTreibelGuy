@@ -35,23 +35,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="281" max="32767" attributes="0"/>
-                      <Component id="PlayResumeButton" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="setButton" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="stopButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="positionSlider" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="setButton" min="-2" pref="161" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="playResumeButton" min="-2" pref="161" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="stopButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="272" max="32767" attributes="0"/>
           </Group>
+          <Component id="positionProgressBar" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -60,11 +53,13 @@
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="stopButton" max="32767" attributes="0"/>
-                  <Component id="setButton" alignment="0" max="32767" attributes="0"/>
-                  <Component id="PlayResumeButton" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="playResumeButton" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                      <Component id="setButton" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="unrelated" pref="135" max="32767" attributes="0"/>
-              <Component id="positionSlider" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <Component id="positionProgressBar" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,33 +71,48 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/exit.png"/>
+          <Image iconType="3" name="/Stop-Disabled-icon.png"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JSlider" name="positionSlider">
-      <Properties>
-        <Property name="value" type="int" value="0"/>
-      </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="positionSliderStateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stopButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="setButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="set"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Music-icon.png"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="PlayResumeButton">
+    <Component class="javax.swing.JButton" name="playResumeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="playResume"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Play.png"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PlayResumeButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playResumeButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="positionProgressBar">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
