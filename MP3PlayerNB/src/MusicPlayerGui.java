@@ -2,9 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.awt.Color;
 import java.util.*;
 import java.io.File;
 import javax.swing.JFileChooser;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 /**
  *
  * @author Jonas
@@ -26,6 +31,7 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         p = new MusicPlayer();
         p.addListener(this);
         fileC = new JFileChooser();
+        getContentPane().setBackground(Color.black);
         initComponents();
     }
 
@@ -49,10 +55,18 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MP3Player");
+        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(0, 0, 0));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFont(new java.awt.Font("Aramis", 3, 18)); // NOI18N
+        setForeground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
 
         stopButton.setBackground(new java.awt.Color(0, 0, 0));
+        stopButton.setOpaque(false);
+        stopButton.setBackground(new Color(0,0,0,0));
         stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Stop-Disabled-icon.png"))); // NOI18N
         stopButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +75,8 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         });
 
         setButton.setBackground(new java.awt.Color(0, 0, 0));
+        setButton.setOpaque(false);
+        setButton.setBackground(new Color(0,0,0,0));
         setButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Music-icon.png"))); // NOI18N
         setButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +85,8 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         });
 
         playResumeButton.setBackground(new java.awt.Color(0, 0, 0));
+        playResumeButton.setOpaque(false);
+        playResumeButton.setBackground(new Color(0,0,0,0));
         playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png"))); // NOI18N
         playResumeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +108,7 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
                 .addComponent(playResumeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(stopButton)
-                .addGap(0, 272, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
             .addComponent(positionProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -153,6 +171,7 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         p.stop();
         playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png")));
+        pop = 1;
     }//GEN-LAST:event_stopButtonActionPerformed
 
     /**
