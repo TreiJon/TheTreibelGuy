@@ -18,6 +18,8 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
     private int pop;
     private boolean mouse;
     private LinkedList playl;
+    private String favorit;
+    private boolean favoritIsSet;
     
     
     public MusicPlayerGui() {
@@ -27,6 +29,8 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         p = new MusicPlayer();
         p.addListener(this);
         fileC = new JFileChooser();
+        favorit = "";
+        favoritIsSet = false;
         getContentPane().setBackground(Color.black);
         initComponents();
     }
@@ -43,22 +47,38 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        stopButton = new javax.swing.JButton();
-        setButton = new javax.swing.JButton();
-        playResumeButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTabbedPane6 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
         positionProgressBar = new javax.swing.JProgressBar();
         fastrewButton = new javax.swing.JButton();
-        fastForwardButton = new javax.swing.JButton();
-        BirthdayButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        playResumeButton = new javax.swing.JButton();
+        jTabbedPane5 = new javax.swing.JTabbedPane();
+        jTabbedPane7 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        setButton = new javax.swing.JButton();
+        BirthdayButton = new javax.swing.JButton();
+        FavoritFile = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        joggenTextF1 = new javax.swing.JTextField();
+        fröscheTextF1 = new javax.swing.JTextField();
+        kalorienTextF1 = new javax.swing.JTextField();
+        euroTextF1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        stopButton = new javax.swing.JButton();
+        fastForwardButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        euroTextF = new javax.swing.JTextField();
-        fröscheTextF = new javax.swing.JTextField();
-        kalorienTextF = new javax.swing.JTextField();
-        joggenTextF = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jTabbedPane6.addTab("tab1", jPanel3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MP3Player");
@@ -71,42 +91,6 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         setPreferredSize(new java.awt.Dimension(800, 500));
         setResizable(false);
         getContentPane().setLayout(null);
-
-        stopButton.setBackground(new java.awt.Color(0, 0, 0));
-        stopButton.setOpaque(false);
-        stopButton.setBackground(new Color(0,0,0,0));
-        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Stop-Disabled-icon.png"))); // NOI18N
-        stopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(stopButton);
-        stopButton.setBounds(600, 250, 161, 162);
-
-        setButton.setBackground(new java.awt.Color(0, 0, 0));
-        setButton.setOpaque(false);
-        setButton.setBackground(new Color(0,0,0,0));
-        setButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Music-icon.png"))); // NOI18N
-        setButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(setButton);
-        setButton.setBounds(30, 60, 161, 162);
-
-        playResumeButton.setBackground(new java.awt.Color(0, 0, 0));
-        playResumeButton.setOpaque(false);
-        playResumeButton.setBackground(new Color(0,0,0,0));
-        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png"))); // NOI18N
-        playResumeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playResumeButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(playResumeButton);
-        playResumeButton.setBounds(220, 250, 161, 162);
 
         positionProgressBar.setBackground(new java.awt.Color(0, 0, 0));
         positionProgressBar.setForeground(new java.awt.Color(0, 0, 0));
@@ -123,7 +107,135 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
             }
         });
         getContentPane().add(fastrewButton);
-        fastrewButton.setBounds(30, 250, 160, 160);
+        fastrewButton.setBounds(20, 250, 160, 160);
+
+        jLabel3.setFont(new java.awt.Font("Title Wave", 2, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Happy-birthday und einen super schönen guten morgen !!!");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(30, 400, 820, 50);
+
+        playResumeButton.setBackground(new java.awt.Color(0, 0, 0));
+        playResumeButton.setOpaque(false);
+        playResumeButton.setBackground(new Color(0,0,0,0));
+        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png"))); // NOI18N
+        playResumeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                playResumeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(playResumeButton);
+        playResumeButton.setBounds(200, 250, 160, 160);
+
+        jPanel2.setLayout(null);
+
+        setButton.setBackground(new java.awt.Color(0, 0, 0));
+        setButton.setOpaque(false);
+        setButton.setBackground(new Color(0,0,0,0));
+        setButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Music-icon.png"))); // NOI18N
+        setButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(setButton);
+        setButton.setBounds(20, 10, 161, 162);
+
+        BirthdayButton.setBackground(new java.awt.Color(0, 0, 0));
+        BirthdayButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gift-5-icon.png"))); // NOI18N
+        BirthdayButton.setOpaque(false);
+        BirthdayButton.setBackground(new Color(0,0,0,0));
+        BirthdayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BirthdayButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(BirthdayButton);
+        BirthdayButton.setBounds(200, 10, 160, 160);
+
+        FavoritFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/System-icon.png"))); // NOI18N
+        FavoritFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FavoritFileActionPerformed(evt);
+            }
+        });
+        jPanel2.add(FavoritFile);
+        FavoritFile.setBounds(380, 10, 160, 160);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Black Background1.jpg"))); // NOI18N
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(0, 0, 800, 190);
+
+        jTabbedPane7.addTab("File", jPanel2);
+
+        jPanel1.setLayout(null);
+
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Black Background1.jpg"))); // NOI18N
+        jLabel8.setText("jLabel8");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(0, 10, 790, 180);
+
+        jTabbedPane7.addTab("Playlist", jPanel1);
+
+        jPanel5.setLayout(null);
+
+        joggenTextF1.setText("Joggen");
+        jPanel5.add(joggenTextF1);
+        joggenTextF1.setBounds(170, 140, 170, 30);
+
+        fröscheTextF1.setText("Frösche");
+        fröscheTextF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fröscheTextF1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(fröscheTextF1);
+        fröscheTextF1.setBounds(170, 60, 170, 30);
+
+        kalorienTextF1.setText("Kalorien");
+        jPanel5.add(kalorienTextF1);
+        kalorienTextF1.setBounds(170, 100, 170, 30);
+
+        euroTextF1.setText("Euro");
+        euroTextF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                euroTextF1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(euroTextF1);
+        euroTextF1.setBounds(170, 20, 170, 30);
+
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frog.png"))); // NOI18N
+        jPanel5.add(jLabel6);
+        jLabel6.setBounds(10, 10, 130, 160);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Black Background1.jpg"))); // NOI18N
+        jLabel7.setText("00000");
+        jPanel5.add(jLabel7);
+        jLabel7.setBounds(0, 0, 790, 190);
+
+        jTabbedPane7.addTab("Frog", jPanel5);
+
+        jTabbedPane5.addTab("Mp3", jTabbedPane7);
+
+        getContentPane().add(jTabbedPane5);
+        jTabbedPane5.setBounds(0, 0, 800, 240);
+
+        stopButton.setBackground(new java.awt.Color(0, 0, 0));
+        stopButton.setOpaque(false);
+        stopButton.setBackground(new Color(0,0,0,0));
+        stopButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Stop-Disabled-icon.png"))); // NOI18N
+        stopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(stopButton);
+        stopButton.setBounds(560, 250, 160, 160);
 
         fastForwardButton.setBackground(new java.awt.Color(0, 0, 0));
         fastForwardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FastForward1.png"))); // NOI18N
@@ -135,62 +247,11 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
             }
         });
         getContentPane().add(fastForwardButton);
-        fastForwardButton.setBounds(410, 250, 160, 160);
-
-        BirthdayButton.setBackground(new java.awt.Color(0, 0, 0));
-        BirthdayButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gift-5-icon.png"))); // NOI18N
-        BirthdayButton.setOpaque(false);
-        BirthdayButton.setBackground(new Color(0,0,0,0));
-        BirthdayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BirthdayButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(BirthdayButton);
-        BirthdayButton.setBounds(220, 60, 160, 160);
-
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Arial Black", 2, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frog.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(420, 60, 130, 160);
-
-        jLabel3.setFont(new java.awt.Font("Title Wave", 2, 20)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Happy-birthday und einen super schönen guten morgen !!!");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 0, 820, 50);
+        fastForwardButton.setBounds(380, 250, 160, 160);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Black Background1.jpg"))); // NOI18N
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 800, 500);
-
-        euroTextF.setText("Euro");
-        euroTextF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                euroTextFActionPerformed(evt);
-            }
-        });
-        getContentPane().add(euroTextF);
-        euroTextF.setBounds(570, 90, 160, 20);
-
-        fröscheTextF.setText("Frösche");
-        fröscheTextF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fröscheTextFActionPerformed(evt);
-            }
-        });
-        getContentPane().add(fröscheTextF);
-        fröscheTextF.setBounds(570, 120, 160, 20);
-
-        kalorienTextF.setText("Kalorien");
-        getContentPane().add(kalorienTextF);
-        kalorienTextF.setBounds(570, 150, 160, 20);
-
-        joggenTextF.setText("Joggen");
-        getContentPane().add(joggenTextF);
-        joggenTextF.setBounds(570, 180, 160, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,17 +261,19 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
        positionProgressBar.setValue(newPosition);
     }
     
-    private void setButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButtonActionPerformed
-            int returnVal = fileC.showOpenDialog(MusicPlayerGui.this);
-            if (returnVal == JFileChooser.APPROVE_OPTION)
-            {
-                File datei = fileC.getSelectedFile();
-                p.open(datei.getAbsolutePath());
-                p.stop();
-//                playList.add
-                pop = 1;
-            }
-    }//GEN-LAST:event_setButtonActionPerformed
+    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+        p.stop();
+        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png")));
+        pop = 1;
+    }//GEN-LAST:event_stopButtonActionPerformed
+
+    private void fastForwardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastForwardButtonActionPerformed
+      p.fastForward();
+    }//GEN-LAST:event_fastForwardButtonActionPerformed
+
+    private void fastrewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastrewButtonActionPerformed
+     p.rewind();
+    }//GEN-LAST:event_fastrewButtonActionPerformed
 
     private void playResumeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playResumeButtonActionPerformed
         if(pop != 0)
@@ -236,35 +299,47 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
         }
     }//GEN-LAST:event_playResumeButtonActionPerformed
 
-    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
-        p.stop();
-        playResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Play.png")));
-        pop = 1;
-    }//GEN-LAST:event_stopButtonActionPerformed
+    private void euroTextF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_euroTextF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_euroTextF1ActionPerformed
 
-    private void fastForwardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastForwardButtonActionPerformed
-      p.fastForward();
-    }//GEN-LAST:event_fastForwardButtonActionPerformed
-
-    private void fastrewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastrewButtonActionPerformed
-     p.rewind();
-    }//GEN-LAST:event_fastrewButtonActionPerformed
+    private void fröscheTextF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fröscheTextF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fröscheTextF1ActionPerformed
 
     private void BirthdayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthdayButtonActionPerformed
-//                p.open("C:\Dokumente und Einstellungen\Jonas\Eigene Dateien\Any Video Converter\MP3\Happy Birthday.mp3");
-        p.open("Happy Birthday.mp3");
+        //                p.open("C:\Dokumente und Einstellungen\Jonas\Eigene Dateien\Any Video Converter\MP3\Happy Birthday.mp3");
+        if(favoritIsSet)
+        p.open(favorit);
         pop = 1;
     }//GEN-LAST:event_BirthdayButtonActionPerformed
 
-    private void euroTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_euroTextFActionPerformed
-//            int e = Integer.parseInt(euroTextF.getText());
-//            fröscheTextF.setText(String.valueOf(e*27));
-//            kalorienTextF.setText(String.valueOf(()));
-    }//GEN-LAST:event_euroTextFActionPerformed
+    private void setButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButtonActionPerformed
+        int returnVal = fileC.showOpenDialog(MusicPlayerGui.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            File datei = fileC.getSelectedFile();
+            p.open(datei.getAbsolutePath());
+            System.out.println(datei.getAbsolutePath());
+            p.stop();
+            //                playList.add
+            pop = 1;
+        }
+    }//GEN-LAST:event_setButtonActionPerformed
 
-    private void fröscheTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fröscheTextFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fröscheTextFActionPerformed
+    private void FavoritFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FavoritFileActionPerformed
+        int returnVal = fileC.showOpenDialog(MusicPlayerGui.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            File datei = fileC.getSelectedFile();
+            p.open(datei.getAbsolutePath());
+            System.out.println(datei.getAbsolutePath());
+            p.stop();
+            favorit = datei.getAbsolutePath();
+            favoritIsSet = true;
+            pop = 1;
+        }
+    }//GEN-LAST:event_FavoritFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,16 +377,28 @@ public class MusicPlayerGui extends javax.swing.JFrame implements MusicPlayerLis
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BirthdayButton;
-    private javax.swing.JTextField euroTextF;
+    private javax.swing.JButton FavoritFile;
+    private javax.swing.JTextField euroTextF1;
     private javax.swing.JButton fastForwardButton;
     private javax.swing.JButton fastrewButton;
-    private javax.swing.JTextField fröscheTextF;
+    private javax.swing.JTextField fröscheTextF1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField joggenTextF;
-    private javax.swing.JTextField kalorienTextF;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTabbedPane jTabbedPane5;
+    private javax.swing.JTabbedPane jTabbedPane6;
+    private javax.swing.JTabbedPane jTabbedPane7;
+    private javax.swing.JTextField joggenTextF1;
+    private javax.swing.JTextField kalorienTextF1;
     private javax.swing.JButton playResumeButton;
     private javax.swing.JProgressBar positionProgressBar;
     private javax.swing.JButton setButton;
